@@ -2,12 +2,12 @@
    CSS VARIABLES & RESET
    ============================================= */
 :root {
-  --primary-yellow: #f5c518;
-  --primary-yellow-light: #ffd740;
-  --primary-yellow-dark: #e8b000;
-  --gold-gradient: linear-gradient(135deg, #ffd740 0%, #f5c518 50%, #e8a800 100%);
-  --dark-black: #0f0f0f;
-  --dark-charcoal: #1a1a1a;
+  --primary-yellow: #efcf2b;
+  --primary-yellow-light: #efcf2b;
+  --primary-yellow-dark: #efc03e;
+  --gold-gradient: linear-gradient(135deg, #efcf2b 0%, #efc03e 100%);
+  --dark-black: #000000;
+  --dark-charcoal: #000000;
   --text-gray: #333333;
   --text-muted: #666666;
   --text-light: #999999;
@@ -19,14 +19,14 @@
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
   --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
   --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
-  --shadow-gold: 0 8px 32px rgba(245,197,24,0.25);
+  --shadow-gold: 0 8px 32px rgba(239,192,62,0.25);
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
   --transition: 0.3s ease;
   --transition-slow: 0.5s ease;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: Arial, Helvetica, sans-serif;
+  --font-display: Arial, Helvetica, sans-serif;
   --header-h: 80px;
 }
 
@@ -236,6 +236,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .header__logo img {
   height: 48px;
   width: auto;
+  object-fit: contain;
   transition: opacity var(--transition);
 }
 
@@ -1181,6 +1182,66 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 
 /* =============================================
+   UNIT GALLERY
+   ============================================= */
+.unit-gallery {
+  padding: 96px 0;
+  background: var(--bg-white);
+}
+
+.unit-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 220px;
+  gap: 14px;
+}
+
+.unit-gallery__item {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--bg-section);
+  box-shadow: var(--shadow-sm);
+}
+
+.unit-gallery__item--wide { grid-column: span 2; }
+.unit-gallery__item--tall { grid-row: span 2; }
+
+.unit-gallery__item::after {
+  content: 'Ampliar foto';
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.unit-gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow), filter var(--transition);
+}
+
+.unit-gallery__item:hover img {
+  transform: scale(1.045);
+  filter: brightness(0.88);
+}
+
+.unit-gallery__item:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =============================================
    MEDIA / SOCIAL SECTION
    ============================================= */
 .media {
@@ -1523,11 +1584,17 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   .catalog { padding: 64px 0; }
   .coverage { padding: 64px 0; }
   .media { padding: 64px 0; }
+  .unit-gallery { padding: 64px 0; }
   .contact { padding: 64px 0; }
 
   .social-bar {
     grid-template-columns: 1fr 1fr;
     gap: 14px;
+  }
+
+  .unit-gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 190px;
   }
 
   .videos-grid {
@@ -1575,6 +1642,17 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   .coverage__cities { grid-template-columns: 1fr; }
 
   .social-bar { grid-template-columns: 1fr; }
+
+  .unit-gallery__grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 230px;
+  }
+
+  .unit-gallery__item--wide,
+  .unit-gallery__item--tall {
+    grid-column: auto;
+    grid-row: auto;
+  }
 
   .hero__tag { font-size: 0.7rem; }
 
